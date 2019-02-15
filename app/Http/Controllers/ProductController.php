@@ -18,7 +18,7 @@ class ProductController extends Controller
      
     public function index()
     {
-        $products = Product::paginate($this->paginate); // si pas de paginate ->get()
+        $products = Product::orderBy('created_at', 'desc')->paginate($this->paginate); // afficher les produits les plus récents en premier
         return view('back.product.index', ['products' => $products]);
     }
 
@@ -97,15 +97,15 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'size' => 'required|integer',
             'url_image' => 'image',
-            'status' => 'in:publié,brouillon',
-            'code' => 'string',
+            'status' => 'required|in:Publié,Brouillon',
+            'code' => 'required|string',
             'reference' => 'required|string',
             'category_id' => 'required|integer'
         ]);
 
         $product = Product::find($id);
         $product->update($request->all());
-        return redirect()->route('admin.index')->with('message', 'success');
+        return redirect()->route('admin.index')->with('message', 'Le produit a bien été modifié');
     }
 
     /**
@@ -118,6 +118,6 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        return redirect()->route('admin.index')->with('message', 'success delete');
+        return redirect()->route('admin.index')->with('message', 'Le produit a bien été supprimé');
     }
 }
