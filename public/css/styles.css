@@ -1,0 +1,15 @@
+.pagination ul {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+nav.navbar.navbar-light {
+    background-color: lightgrey;
+    padding: 0;
+}
+span.navbar-brand.mb-0.h1 {
+    padding-left: 8px;
+}
+.image_suppl {
+    padding-bottom: 1rem;
+}
+
